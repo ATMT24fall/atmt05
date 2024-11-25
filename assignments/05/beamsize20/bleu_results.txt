@@ -1,0 +1,13 @@
+BLEU Score Evaluation Results - 2024年11月25日 星期一 15时28分11秒 CET
+{
+ "name": "BLEU",
+ "score": 21.7,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.4.3",
+ "verbose_score": "53.6/28.0/16.7/9.8 (BP = 0.977 ratio = 0.977 hyp_len = 3804 ref_len = 3892)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.4.3"
+}
