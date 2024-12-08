@@ -8,7 +8,7 @@ DATA_PATH="data/en-fr/prepared"
 SOURCE_LANG="fr"
 TARGET_LANG="en"
 BEAM_SIZE=3
-OUTPUT_DIR="assignments/05/beamsize${BEAM_SIZE}"
+OUTPUT_DIR="assignments/05/beamsize${BEAM_SIZE}_constant"
 TRANSLATION_OUTPUT="${OUTPUT_DIR}/translations.txt"
 POSTPROCESSED_OUTPUT="${OUTPUT_DIR}/translations.p.txt"
 CHECKPOINT_PATH="assignments/03/baseline/checkpoints/checkpoint_last.pt"
@@ -19,7 +19,7 @@ RESULTS_FILE="${OUTPUT_DIR}/bleu_results.txt"
 mkdir -p "$OUTPUT_DIR"
 
 echo "Step 1: Translating the dataset..."
-python translate_beam.py \
+python translate_beam_constant.py \
     --data "$DATA_PATH" \
     --dicts "$DATA_PATH" \
     --checkpoint-path "$CHECKPOINT_PATH" \
