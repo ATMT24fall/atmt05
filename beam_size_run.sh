@@ -19,12 +19,16 @@ RESULTS_FILE="${OUTPUT_DIR}/bleu_results.txt"
 mkdir -p "$OUTPUT_DIR"
 
 echo "Step 1: Translating the dataset..."
+# Add time measurement
+START_TIME=$(date +%s)
 python translate_beam.py \
     --data "$DATA_PATH" \
     --dicts "$DATA_PATH" \
     --checkpoint-path "$CHECKPOINT_PATH" \
     --output "$TRANSLATION_OUTPUT" \
     --beam-size "$BEAM_SIZE"
+END_TIME=$(date +%s)
+TRANSLATION_TIME=$((END_TIME - START_TIME))
 
 echo "Step 2: Postprocessing translations..."
 bash "$POSTPROCESS_SCRIPT" \
@@ -35,8 +39,11 @@ bash "$POSTPROCESS_SCRIPT" \
 # Evaluate using BLEU score and save results
 echo "Step 3: Evaluating translations..."
 if command -v sacrebleu &>/dev/null; then
-    echo "BLEU Score Evaluation Results - $(date)" | tee -a "$RESULTS_FILE"
-    cat "$POSTPROCESSED_OUTPUT" | sacrebleu data/en-fr/raw/test.en | tee -a "$RESULTS_FILE"
+    {
+        echo "BLEU Score Evaluation Results - $(date)"
+        echo "Translation time: ${TRANSLATION_TIME} seconds"
+        cat "$POSTPROCESSED_OUTPUT" | sacrebleu data/en-fr/raw/test.en
+    } | tee -a "$RESULTS_FILE"
 else
     echo "Error: sacrebleu is not installed. Please install it to calculate BLEU scores." >&2
     exit 1

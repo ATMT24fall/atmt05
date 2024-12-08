@@ -1,4 +1,5 @@
-BLEU Score Evaluation Results - Sun Dec  8 19:52:07 CET 2024
+BLEU Score Evaluation Results - Sun Dec  8 20:20:12 CET 2024
+Translation time: 13 seconds
 {
  "name": "BLEU",
  "score": 18.0,
