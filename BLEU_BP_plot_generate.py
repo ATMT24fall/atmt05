@@ -61,16 +61,50 @@ fig.update_layout(
         y=0.99,
         xanchor="right",
         x=0.99,
-        font=dict(size=24)
-    )
+        font=dict(size=24),
+        bgcolor='rgba(255, 255, 255, 0.9)',
+        bordercolor='black',
+        borderwidth=1
+    ),
+    plot_bgcolor='white',
+    paper_bgcolor='white'
 )
 
 # Update axes
-fig.update_xaxes(title_text="Beam Size", gridcolor='lightgray', title_font=dict(size=24), tickfont=dict(size=20))
-fig.update_yaxes(title_text="BLEU Score", secondary_y=False, 
-                 gridcolor='lightgray', color='#2E86C1', title_font=dict(size=24), tickfont=dict(size=20))
-fig.update_yaxes(title_text="Brevity Penalty", secondary_y=True, 
-                 gridcolor='lightgray', color='#E74C3C', title_font=dict(size=24), tickfont=dict(size=20))
+fig.update_xaxes(
+    title_text="Beam Size", 
+    gridcolor='lightgray', 
+    title_font=dict(size=24), 
+    tickfont=dict(size=20),
+    showline=True,
+    linewidth=2,
+    linecolor='black',
+    mirror=True
+)
+fig.update_yaxes(
+    title_text="BLEU Score", 
+    secondary_y=False, 
+    gridcolor='lightgray', 
+    color='#2E86C1', 
+    title_font=dict(size=24), 
+    tickfont=dict(size=20),
+    showline=True,
+    linewidth=2,
+    linecolor='black',
+    mirror=True
+)
+fig.update_yaxes(
+    title_text="Brevity Penalty", 
+    secondary_y=True, 
+    gridcolor='lightgray', 
+    color='#E74C3C', 
+    title_font=dict(size=24), 
+    tickfont=dict(size=20),
+    showline=True,
+    linewidth=2,
+    linecolor='black',
+    mirror=True
+)
 
 # Save and show the plot
 fig.write_html("bleu_vs_brevity_penalty.html")  # Interactive HTML file
