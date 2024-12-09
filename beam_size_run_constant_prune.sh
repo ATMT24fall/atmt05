@@ -8,7 +8,7 @@ DATA_PATH="data/en-fr/prepared"
 SOURCE_LANG="fr"
 TARGET_LANG="en"
 BEAM_SIZE=3
-OUTPUT_DIR="assignments/05/beamsize${BEAM_SIZE}"
+OUTPUT_DIR="assignments/05/beamsize${BEAM_SIZE}_constant_prune"
 TRANSLATION_OUTPUT="${OUTPUT_DIR}/translations.txt"
 POSTPROCESSED_OUTPUT="${OUTPUT_DIR}/translations.p.txt"
 CHECKPOINT_PATH="assignments/03/baseline/checkpoints/checkpoint_last.pt"
@@ -21,7 +21,7 @@ mkdir -p "$OUTPUT_DIR"
 echo "Step 1: Translating the dataset..."
 # Add time measurement
 START_TIME=$(date +%s)
-python translate_beam.py \
+python translate_beam_constant_prune.py \
     --data "$DATA_PATH" \
     --dicts "$DATA_PATH" \
     --checkpoint-path "$CHECKPOINT_PATH" \

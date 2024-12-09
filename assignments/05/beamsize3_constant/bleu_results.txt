@@ -1,0 +1,14 @@
+BLEU Score Evaluation Results - Sun Dec  8 21:58:33 CET 2024
+Translation time: 17 seconds
+{
+ "name": "BLEU",
+ "score": 17.8,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.4.3",
+ "verbose_score": "45.7/23.1/13.1/7.3 (BP = 1.000 ratio = 1.301 hyp_len = 5064 ref_len = 3892)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.4.3"
+}
