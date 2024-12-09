@@ -52,30 +52,58 @@ class BeamSearch(object):
         return (best_node[0], node)
 
     def prune(self):
-    
         """
-        Prunes hypotheses based on best finished hypothesis score
+        Prunes beams using the best completed sequence as threshold,
+        while maintaining exactly beam_size active beams.
         """
-        # 1. 找到最佳完成假设的分数
+        merged = PriorityQueue()
+        final_nodes = set()
         best_final_score = float('inf')
-        if not self.final.empty():
-            best_final_score = self.final.queue[0][0] # 最小的负对数概率
-        # 2. 只保留分数好于best_final_score的未完成假设
-        new_nodes = PriorityQueue()
-        temp_nodes = []  # 临时存储节点
         
-        # 先获取所有节点
+        # Get best final score and store final nodes
+        while not self.final.empty():
+            node = self.final.get()
+            best_final_score = min(best_final_score, node[0])
+            final_nodes.add(id(node[2]))
+            merged.put(node)
+        
+        # Add all nodes from regular queue
         while not self.nodes.empty():
             node = self.nodes.get()
-            temp_nodes.append(node)
+            merged.put(node)
         
-        # 按分数筛选并重新加入队列
-        for node in temp_nodes:
-            if node[0] <= best_final_score:  # 因为是负对数概率，所以用<=
+        new_nodes = PriorityQueue()
+        new_final = PriorityQueue()
+        
+        # First, restore all final nodes that are better than threshold
+        while not merged.empty():
+            node = merged.get()
+            if id(node[2]) in final_nodes:
+                new_final.put(node)
+            else:
+                merged.put(node)
+                break
+        
+        # Then fill remaining slots in beam_size with best non-final nodes
+        remaining_slots = self.beam_size - new_nodes.qsize()
+        while not merged.empty() and remaining_slots > 0:
+            node = merged.get()
+            if id(node[2]) not in final_nodes:
+                # Only add if better than best final or no finals exist
+                if node[0] <= best_final_score or best_final_score == float('inf'):
+                    new_nodes.put(node)
+                    remaining_slots -= 1
+        
+        # If we still need more nodes to maintain beam_size,
+        # add remaining nodes regardless of score
+        while not merged.empty() and remaining_slots > 0:
+            node = merged.get()
+            if id(node[2]) not in final_nodes:
                 new_nodes.put(node)
+                remaining_slots -= 1
         
-        # 3. 更新nodes队列
         self.nodes = new_nodes
+        self.final = new_final
 
     def pad_sequence(self, node):
         """Pads the sequence to max_len while keeping the original sequence in node"""
@@ -94,15 +122,9 @@ class BeamSearchNode(object):
         self.original_sequence = sequence  # Store original sequence
         self.length = length  # Actual sequence length
         
-        # 确保序列长度一致，使用 max_len + 1 (因为包含了开始标记)
-        target_len = search.max_len + 1
-        if len(sequence) < target_len:
-            missing = target_len - len(sequence)
-            sequence = torch.cat((sequence, torch.tensor([search.pad]*missing).long()))
-        elif len(sequence) > target_len:
-            sequence = sequence[:target_len]
-            
-        self.sequence = sequence.cpu()
+        # Pad sequence during initialization
+        missing = search.max_len - length
+        self.sequence = torch.cat((sequence.cpu(), torch.tensor([search.pad]*missing).long()))
         
         self.emb = emb
         self.lstm_out = lstm_out
@@ -113,15 +135,8 @@ class BeamSearchNode(object):
         self.search = search
 
     def get_sequence(self):
-        """Return sequence for decoder (always return full padded sequence)"""
-        # 确保返回的序列长度为 max_len + 1
-        target_len = self.search.max_len + 1
-        if len(self.sequence) < target_len:
-            missing = target_len - len(self.sequence)
-            return torch.cat((self.sequence, torch.tensor([self.search.pad]*missing).long()))
-        elif len(self.sequence) > target_len:
-            return self.sequence[:target_len]
-        return self.sequence
+        """Return sequence for decoder (only up to actual length)"""
+        return self.sequence[:self.length]  # Only return sequence up to actual length
 
     def eval(self, alpha=0.0):
         """ Returns score of sequence up to this node """
