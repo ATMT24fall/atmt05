@@ -72,38 +72,29 @@ class BeamSearch(object):
             node = self.nodes.get()
             merged.put(node)
         
-        new_nodes = PriorityQueue()
-        new_final = PriorityQueue()
+        # Reset queues
+        self.nodes = PriorityQueue()
+        self.final = PriorityQueue()
         
-        # First, restore all final nodes that are better than threshold
+        # First, restore all final nodes
         while not merged.empty():
             node = merged.get()
             if id(node[2]) in final_nodes:
-                new_final.put(node)
+                self.final.put(node)
             else:
+                # Keep first non-final node and break
                 merged.put(node)
                 break
         
-        # Then fill remaining slots in beam_size with best non-final nodes
-        remaining_slots = self.beam_size - new_nodes.qsize()
+        # Then fill remaining slots with best non-final nodes
+        remaining_slots = self.beam_size
         while not merged.empty() and remaining_slots > 0:
             node = merged.get()
             if id(node[2]) not in final_nodes:
                 # Only add if better than best final or no finals exist
                 if node[0] <= best_final_score or best_final_score == float('inf'):
-                    new_nodes.put(node)
+                    self.nodes.put(node)
                     remaining_slots -= 1
-        
-        # If we still need more nodes to maintain beam_size,
-        # add remaining nodes regardless of score
-        while not merged.empty() and remaining_slots > 0:
-            node = merged.get()
-            if id(node[2]) not in final_nodes:
-                new_nodes.put(node)
-                remaining_slots -= 1
-        
-        self.nodes = new_nodes
-        self.final = new_final
 
     def pad_sequence(self, node):
         """Pads the sequence to max_len while keeping the original sequence in node"""

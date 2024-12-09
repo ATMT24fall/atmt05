@@ -204,9 +204,9 @@ def main(args):
         best_sents = []
         for search in searches:
             best_node = search.get_best()[1]
-            # 获取序列并确保长度一致
-            seq = best_node.sequence[1:]  # 去掉开始标记
-            if len(seq) < args.max_len - 1:  # -1 因为我们去掉了开始标记
+            # Get sequence and ensure consistent length
+            seq = best_node.sequence[1:]  # Remove start token
+            if len(seq) < args.max_len - 1:  # -1 because we removed the start token
                 missing = (args.max_len - 1) - len(seq)
                 seq = torch.cat((seq, torch.tensor([tgt_dict.pad_idx]*missing).long()))
             best_sents.append(seq.cpu())
