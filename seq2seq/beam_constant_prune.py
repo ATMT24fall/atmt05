@@ -52,49 +52,30 @@ class BeamSearch(object):
         return (best_node[0], node)
 
     def prune(self):
-        """ 
-        Compares all nodes and keeps only the beam_size best ones,
-        ensuring completed nodes go back to final queue if they rank high enough.
+    
         """
-        # Create a new priority queue for merged nodes
-        merged = PriorityQueue()
+        Prunes hypotheses based on best finished hypothesis score
+        """
+        # 1. 找到最佳完成假设的分数
+        best_final_score = float('inf')
+        if not self.final.empty():
+            best_final_score = self.final.queue[0][0] # 最小的负对数概率
+        # 2. 只保留分数好于best_final_score的未完成假设
+        new_nodes = PriorityQueue()
+        temp_nodes = []  # 临时存储节点
         
-        # Track which nodes were from final queue
-        final_nodes = set()
-        
-        # Move all nodes from both queues to merged queue
+        # 先获取所有节点
         while not self.nodes.empty():
             node = self.nodes.get()
-            merged.put(node)
+            temp_nodes.append(node)
         
-        while not self.final.empty():
-            node = self.final.get()
-            # Mark this node as coming from final queue
-            final_nodes.add(id(node[2]))  # Use object id as identifier
-            merged.put(node)
-        
-        # Create new priority queues
-        new_nodes = PriorityQueue()
-        new_final = PriorityQueue()
-        
-        # Keep only beam_size best nodes
-        kept_count = 0
-        while not merged.empty() and kept_count < self.beam_size:
-            node = merged.get()
-            kept_count += 1
-            
-            # If node was originally in final queue, put it back there
-            if id(node[2]) in final_nodes:
-                new_final.put(node)
-            # # If node ends with EOS but wasn't in final before, add it to final
-            # elif node[2].sequence[node[2].length-1] == node[2].search.eos_idx:
-            #     new_final.put(node)
-            else:
+        # 按分数筛选并重新加入队列
+        for node in temp_nodes:
+            if node[0] <= best_final_score:  # 因为是负对数概率，所以用<=
                 new_nodes.put(node)
         
-        # Update both queues
+        # 3. 更新nodes队列
         self.nodes = new_nodes
-        self.final = new_final
 
     def pad_sequence(self, node):
         """Pads the sequence to max_len while keeping the original sequence in node"""
@@ -113,9 +94,15 @@ class BeamSearchNode(object):
         self.original_sequence = sequence  # Store original sequence
         self.length = length  # Actual sequence length
         
-        # Pad sequence during initialization
-        missing = search.max_len - length
-        self.sequence = torch.cat((sequence.cpu(), torch.tensor([search.pad]*missing).long()))
+        # 确保序列长度一致，使用 max_len + 1 (因为包含了开始标记)
+        target_len = search.max_len + 1
+        if len(sequence) < target_len:
+            missing = target_len - len(sequence)
+            sequence = torch.cat((sequence, torch.tensor([search.pad]*missing).long()))
+        elif len(sequence) > target_len:
+            sequence = sequence[:target_len]
+            
+        self.sequence = sequence.cpu()
         
         self.emb = emb
         self.lstm_out = lstm_out
@@ -126,8 +113,15 @@ class BeamSearchNode(object):
         self.search = search
 
     def get_sequence(self):
-        """Return sequence for decoder (only up to actual length)"""
-        return self.sequence[:self.length]  # Only return sequence up to actual length
+        """Return sequence for decoder (always return full padded sequence)"""
+        # 确保返回的序列长度为 max_len + 1
+        target_len = self.search.max_len + 1
+        if len(self.sequence) < target_len:
+            missing = target_len - len(self.sequence)
+            return torch.cat((self.sequence, torch.tensor([self.search.pad]*missing).long()))
+        elif len(self.sequence) > target_len:
+            return self.sequence[:target_len]
+        return self.sequence
 
     def eval(self, alpha=0.0):
         """ Returns score of sequence up to this node """
