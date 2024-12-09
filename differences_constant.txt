@@ -1,0 +1,170 @@
+Found 42 differences:
+
+Line 12:
+Original: do it have a movie of this movie ?
+New:      do he have a movie of a movie ?
+
+Line 34:
+Original: please give me your life for your life .
+New:      please talk to me your life for your life .
+
+Line 40:
+Original: he had the kitchen of the call of the money , they &apos;ve decided to walk without him .
+New:      the of was the past of the money of the money of the call of the call of the call of him , they &apos;ve decided to walk without him .
+
+Line 51:
+Original: please take a use of take three times a day .
+New:      please do you have a use three three three times a day .
+
+Line 58:
+Original: he is a lot of hot , and a cold is on the other of the other .
+New:      the past is against a cold , and a cold , and the will be a cold and .
+
+Line 68:
+Original: are there any thing ?
+New:      what &apos;s something good ?
+
+Line 72:
+Original: let &apos;s get up out .
+New:      let &apos;s get up out of ?
+
+Line 95:
+Original: to be a man of a to get a little of the game of the other of the other of living you need to buy a year for hours .
+New:      for a a to be a little of the game of a little game , he must have to buy some more for a .
+
+Line 97:
+Original: all the trip , the trip is free of dollars .
+New:      all the trip , the trip of the trip to dollars .
+
+Line 105:
+Original: &quot; look , a , a , such a careful !
+New:      &quot; look , a , a , such a careful ! &quot;
+
+Line 113:
+Original: those who have the hair hair a great hair from hair .
+New:      those who have the hair hair a lot of hair .
+
+Line 137:
+Original: &quot; he is dead or &quot; or &quot; or &quot; he is in life ?
+New:      &quot; he is dead or &quot; or &quot; or &quot; he is in life ? &quot; &quot; he is life or &quot; . &quot;
+
+Line 140:
+Original: he doesn &apos;t drink you .
+New:      he doesn &apos;t have you to do you .
+
+Line 148:
+Original: he doesn &apos;t know how to solve the problem .
+New:      he doesn &apos;t know how to solve the problem in this way , he will be another of this another .
+
+Line 158:
+Original: look at the right is the have .
+New:      look at the the meeting .
+
+Line 159:
+Original: let &apos;s go to the church for the church .
+New:      the would be sing to the church with the church .
+
+Line 202:
+Original: that &apos;s why I &apos;ve heard you why I saw you .
+New:      that &apos;s why I &apos;ve seen you why I saw you .
+
+Line 209:
+Original: get out of water .
+New:      don &apos;t get out of the water of water !
+
+Line 237:
+Original: do I have to get something something , did this morning ?
+New:      do I have any way something , what &apos;s you ?
+
+Line 250:
+Original: the road is out of the the wrong have been a to get that of this @-@ @-@ has a great team of this @-@ has been trying to get the United
+New:      the road is out of the the wrong have been a to get that of this @-@ @-@ has a great team of this @-@ has been trying to get the United States .
+
+Line 259:
+Original: at least , he is never to learn to learn , he is never to learn for a small place .
+New:      in least , he is never to learn to learn , he is never to learn for a small place .
+
+Line 291:
+Original: is I use this paper ?
+New:      do I can use this paper ?
+
+Line 293:
+Original: &quot; and &quot; heart and &quot; are &quot; the same .
+New:      &quot; and &quot; heart and &quot; are &quot; the same of the same . &quot;
+
+Line 296:
+Original: I &apos;m looking forward to his back .
+New:      I &apos;m looking forward to his back of his car .
+
+Line 298:
+Original: the last thing I want to do it .
+New:      the last thing I want to do it . I want to do it .
+
+Line 315:
+Original: this movie is so if that it is so know .
+New:      this movie is so if that it is so know that he is .
+
+Line 340:
+Original: I &apos;m sorry you to get up .
+New:      you &apos;re sorry of yourself .
+
+Line 343:
+Original: one of a little one is a bit more than a little one of a little one is a little call .
+New:      a little is a bit more than a little more than a little one is a little call .
+
+Line 362:
+Original: it &apos;s this ?
+New:      that &apos;s this ?
+
+Line 367:
+Original: the most of word is &quot; the language of the language language .
+New:      the most of word is &quot; the language of the language language . &quot;
+
+Line 370:
+Original: don &apos;t need to do that sentence .
+New:      don &apos;t need to do that sentence . I need this sentence .
+
+Line 379:
+Original: it &apos;s this isn &apos;t that enough .
+New:      that &apos;s not really really in this isn &apos;t this hard .
+
+Line 380:
+Original: &quot; what age do you have any years ?
+New:      &quot; what age do you have any years ? &quot;
+
+Line 400:
+Original: one of the will a cold out of the meeting .
+New:      a to the will a little off .
+
+Line 421:
+Original: that &apos;s the house in which he has been sleeping when he was child .
+New:      this is the house in which he has been back when he was child .
+
+Line 444:
+Original: he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope
+New:      he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he hope he
+
+Line 445:
+Original: seen from the other of the other day , the girls looks like a big read .
+New:      seen from the other of the other of the matter , the come of a big read .
+
+Line 456:
+Original: is it me ?
+New:      does it give me ?
+
+Line 460:
+Original: get the on on the way to the first hard .
+New:      please put the on on the the way to the way to the way .
+
+Line 467:
+Original: the movie was not so tired .
+New:      the movie was not so bad .
+
+Line 472:
+Original: &quot; what were you have ?
+New:      &quot; what were you have ? &quot; &quot;
+
+Line 487:
+Original: I read that the the made of a woman .
+New:      I read that the the made of a woman . she &apos;s a woman .
+
